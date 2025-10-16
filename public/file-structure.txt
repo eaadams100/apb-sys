@@ -1,0 +1,35 @@
+apb-system/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Header.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   └── Layout.tsx
+│   │   ├── maps/
+│   │   │   ├── APBMap.tsx
+│   │   │   └── MapMarker.tsx
+│   │   ├── bulletins/
+│   │   │   ├── BulletinList.tsx
+│   │   │   ├── BulletinCard.tsx
+│   │   │   ├── CreateBulletin.tsx
+│   │   │   └── BulletinDetail.tsx
+│   │   └── common/
+│   │       ├── SearchBar.tsx
+│   │       └── NotificationBell.tsx
+│   ├── types/
+│   │   └── index.ts
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── socket.ts
+│   │   └── auth.ts
+│   ├── hooks/
+│   │   ├── useSocket.ts
+│   │   └── useBulletins.ts
+│   ├── styles/
+│   │   └── globals.css
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── react-app-env.d.ts
+└── package.json
