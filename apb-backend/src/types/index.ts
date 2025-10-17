@@ -1,4 +1,4 @@
-// src/types/index.ts
+// src/types/index.ts (Backend)
 export interface User {
   id: string;
   email: string;
@@ -17,6 +17,7 @@ export interface Agency {
     lat: number;
     lng: number;
   };
+  createdAt: Date; // Add this line
 }
 
 export interface Bulletin {

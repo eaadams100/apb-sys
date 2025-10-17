@@ -1,9 +1,12 @@
+// src/types/index.ts (Frontend)
 export interface User {
   id: string;
   email: string;
   name: string;
   agencyId: string;
   role: 'officer' | 'admin' | 'dispatcher';
+  createdAt?: Date; // Make optional if not always needed
+  updatedAt?: Date;
 }
 
 export interface Agency {
@@ -14,6 +17,7 @@ export interface Agency {
     lat: number;
     lng: number;
   };
+  createdAt?: Date; // Add this as optional
 }
 
 export interface Bulletin {
@@ -22,7 +26,7 @@ export interface Bulletin {
   description: string;
   type: 'BOLO' | 'MISSING_PERSON' | 'GENERAL_ALERT' | 'VEHICLE' | 'WANTED';
   priority: 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
-  status: 'ACTIVE' | 'RESOLVED' | 'EXPIRED';
+  status: 'ACTIVE' | 'RESOLVED' | 'EXPIRED' | 'DRAFT';
   location: {
     lat: number;
     lng: number;

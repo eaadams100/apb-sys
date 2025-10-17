@@ -8,14 +8,21 @@ import {
   Menu,
   MenuItem,
   Box,
+  Avatar,
+  Chip,
 } from '@mui/material';
 import {
   Notifications as NotificationsIcon,
   AccountCircle,
+  Logout,
+  Person,
 } from '@mui/icons-material';
+import { useAuth } from '../../contexts/AuthContext';
+import NotificationBell from '../common/NotificationBell';
 
 const Header: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { user, logout } = useAuth();
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +32,11 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    handleMenuClose();
+    logout();
+  };
+
   return (
     <AppBar position="static" elevation={1}>
       <Toolbar>
@@ -32,12 +44,22 @@ const Header: React.FC = () => {
           APB System - Law Enforcement Portal
         </Typography>
         
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="error">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          {/* User Info */}
+          {user && (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Chip 
+                label={user.role.toUpperCase()} 
+                color={user.role === 'admin' ? 'secondary' : 'primary'}
+                size="small"
+              />
+              <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                {user.name}
+              </Typography>
+            </Box>
+          )}
+          
+          <NotificationBell />
           
           <IconButton
             edge="end"
@@ -53,10 +75,25 @@ const Header: React.FC = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
+            PaperProps={{
+              style: {
+                width: 200,
+              },
+            }}
           >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My Agency</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+            <MenuItem disabled>
+              <Person sx={{ mr: 1 }} />
+              {user?.name}
+            </MenuItem>
+            <MenuItem disabled>
+              <Typography variant="body2" color="textSecondary">
+                {user?.email}
+              </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <Logout sx={{ mr: 1 }} />
+              Logout
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>
